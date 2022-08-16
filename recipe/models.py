@@ -4,7 +4,6 @@ from xml.dom import ValidationErr
 from django.db import models
 
   
-
 class Recipe(models.Model):
     """Recipe model"""
     name = models.CharField(max_length=255)
@@ -26,6 +25,7 @@ class Recipe(models.Model):
     
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='images/', blank=True)
 
     def __str__(self):
         return self.name

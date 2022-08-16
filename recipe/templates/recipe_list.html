@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Register {% endblock title %}
+
+{% block content %}
+
+    <div class="container py-5">
+      <h1 class="text-center font-weight-bold">
+        view all 
+        <span class="text-success">Recipes</span>
+      </h1> 
+      
+      <div class="masonry-container my-5">
+        {% for recipe in recipes %}
+          <div class="masonry-items">
+          <img src="{{recipe.image.url}}" />
+          <div class="hover-items">
+            <h3>{{recipe.name}}</h3>
+          </div>
+      </div>    {% endfor %}
+    </div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

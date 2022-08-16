@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recipe',
+    'crispy_forms',
 
 
 ]
@@ -130,3 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = "images/"
 MEDIA_ROOT = BASE_DIR / "images"
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"

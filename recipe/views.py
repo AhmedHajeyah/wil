@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from telnetlib import LOGOUT
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import RegistrationForm, LoginForm
+from .models import Recipe
 
 
 
@@ -48,3 +50,17 @@ def logout_user(request):
 
 def home(request):
     return render(request, 'home.html')
+
+
+def home(request):
+    recipes = Recipe.objects.all()
+    context = {
+        'recipes': recipes
+    }
+    return render(request, 'recipe_list.html', context)
+
+class RecipeView(ListView):
+    model = Recipe
+    template_name = 'recipe_list.html'
+    context_object_name = 'recipes'
+    
