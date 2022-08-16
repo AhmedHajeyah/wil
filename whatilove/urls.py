@@ -18,6 +18,7 @@ from django.urls import path
 from recipe import views
 from django.conf import settings
 from django.conf.urls.static import static
+from recipe.models import Recipe
 
 
 
@@ -27,6 +28,7 @@ urlpatterns = [
     path('login/', views.login_user, name='login'),
     path('logout/', views.logout_user, name='logout'),
     path('home/', views.home, name='home'),
+    path('recipe/', Recipe, name='recipe'),
 ]
 
 if settings.DEBUG:

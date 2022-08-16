@@ -21,12 +21,15 @@
       </h1>
       <div class="masonry-container my-5">
 
+        {% for recipe in results %}
         <div class="masonry-items">
-          <img src="images/4.jpg" />
+          <img src="{{recipe.image}}" />
           <div class="hover-items">
-            <h3>Image Caption</h3>
+            <h3>{{recipe.title}}</h3>
           </div>
-        </div>
+        {% endfor %}
+
+
 
       </div>
       <h4 class="text-center">
