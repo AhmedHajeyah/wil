@@ -14,17 +14,14 @@
     {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">
-                Sign Up
+                Login Page
             </legend>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group py-3">
-            <input class="btn btn-outline-primary" type="Submit" value="Sign Up">
+            <input class="btn btn-outline-primary" type="Submit" value="Sign In">
         </div>
     </form>
-    <div class="border-top pt-3">
-        <a href="#">Already have ann account? Log in here</a>
-    </div>
 </div>
 
 
