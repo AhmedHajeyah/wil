@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-from telnetlib import LOGOUT
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 from .forms import RegistrationForm, LoginForm
 from .models import Recipe
 
@@ -48,8 +46,8 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
-def home(request):
-    return render(request, 'home.html')
+# def home(request):
+#     return render(request, 'home.html')
 
 
 def home(request):
