@@ -5,6 +5,9 @@
 
 {% block content %}
 
+Hello World! {{user.first_name}} {{user.last_name}}
+
+
     <div class="container py-5">
       <h1 class="text-center font-weight-bold">
         view all 
@@ -14,26 +17,13 @@
       <div class="masonry-container my-5">
         {% for recipe in recipes %}
           <div class="masonry-items">
-          <img src="{{recipe.image.url}}" />
+          <img src={{recipe.image.url}} alt="">
+          <a href="{%url 'recipe_detail' recipe.id%}">
           <div class="hover-items">
-            <h3>{{recipe.name}}</h3>
+              <h3>{{recipe.name}}</h3>
           </div>
       </div>    {% endfor %}
     </div>
 
 {% endblock content %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

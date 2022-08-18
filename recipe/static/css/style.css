@@ -18,7 +18,7 @@
   
   .masonry-container {
     --gap: 1rem;
-    --columns: 10;
+    --columns: 3;
     display: column !important;
     columns: var(--columns) !important;
     gap: var(--gap) !important;

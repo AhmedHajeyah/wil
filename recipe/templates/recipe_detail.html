@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load static %}
+{% block title %} Recipe detail {% endblock title %}
+
+{% block content %} 
+    <h2>{{ recipe.name }}</h2>
+      <img src="{{ recipe.image.url }}" alt="">
+          <li>Cooking time: <span>{{time_to_cook}}</span>
+        <h5>Ingredients</h5>
+            {% for recipe in recipes %}
+            {{ recipe }}
+            {% for ingredient in recipe.ingredients_set.all %}
+        
+        
+
+
+
+
+
+            <li> {{ ingredient.name }}</li> 
+            {{ ingredient }}
+            {% endfor %}
+        {% endfor %}
+        <li>Calories: {{ recipe.calories }}</li>
+    <h3>Description</h3>
+    <p>{{ recipe.description }}</p>
+      <h3>Instructions</h3>
+          {{ recipe.instructions}}
+  </section> {% endblock content %}

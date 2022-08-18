@@ -18,9 +18,11 @@ class Recipe(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='images/', blank=True)
+    
 
     def __str__(self):
         return self.name
+
 
     
 class Ingredient(models.Model):

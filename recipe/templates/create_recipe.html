@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Create Recipes {% endblock title %}
+
+{% block content %}
+
+<form  action="{% url 'create_recipe' %}" method="POST" enctype="multipart/form-data" >
+      {% csrf_token %}
+<div class="form-group">
+ {{ form|crispy }}
+</div>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+{% endblock content %}
+
+
+
+
+
+
