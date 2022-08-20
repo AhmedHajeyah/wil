@@ -1,28 +1,35 @@
+
+
 {% extends 'base.html' %} {% load static %}
 {% block title %} Recipe detail {% endblock title %}
 
 {% block content %} 
-    <h2>{{ recipe.name }}</h2>
+{% if recipe.user == user %}
+<div class="border-top pt-3">
+    <a href="{% url 'update_recipe' recipe.id %}">Edit</a>
+    {% else %}
+<div class="border-top pt-3">
+{% endif %}
+</div>
+    <h1>{{ recipe.name }}</h1>
       <img src="{{ recipe.image.url }}" alt="">
-          <li>Cooking time: <span>{{time_to_cook}}</span>
-        <h5>Ingredients</h5>
-            {% for recipe in recipes %}
-            {{ recipe }}
-            {% for ingredient in recipe.ingredients_set.all %}
+        <h3>Cooking time:</h3>  <p>{{recipe.time_to_cook}}</p>
+        <h3>Ingredients:</h3>
+
         
+          {% for ingredient in ingredients %}
+            <li>{{ingredient.name}}</li>
+          {% endfor %}
+
+      
+
+        <h3>Instructions:</h3>  <p>{{recipe.instructions}}</p>
+        <h3>Calories:</h3>      <p>{{ recipe.calories }}</p>
+        <h3>Description</h3>    <p>{{ recipe.description }}</p>
+        <h3>Instructions</h3>   <p>{{ recipe.instructions}}</p>
+
+
+
+        </section>
         
-
-
-
-
-
-            <li> {{ ingredient.name }}</li> 
-            {{ ingredient }}
-            {% endfor %}
-        {% endfor %}
-        <li>Calories: {{ recipe.calories }}</li>
-    <h3>Description</h3>
-    <p>{{ recipe.description }}</p>
-      <h3>Instructions</h3>
-          {{ recipe.instructions}}
-  </section> {% endblock content %}
+{% endblock content %}

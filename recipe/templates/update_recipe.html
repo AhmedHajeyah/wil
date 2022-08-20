@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Update Recipes {% endblock title %}
+
+{% block content %}
+
+<form  action="{% url 'update_recipe' pk=recipe.id %}" method="POST" enctype="multipart/form-data" >
+      {% csrf_token %}
+      {% csrf_token %}
+<div class="form-group">
+ {{ form|crispy }}
+ <img src="{{ recipe.image.url }}" alt="">
+
+
+</div>
+
+<button type="update" class="btn btn-primary">Update</button>
+</form>
+
+
+
+{% endblock content %}
+
+
+
+
+
+

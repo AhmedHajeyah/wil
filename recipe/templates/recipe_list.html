@@ -15,6 +15,24 @@ Hello World! {{user.first_name}} {{user.last_name}}
       </h1> 
       
       <div class="masonry-container my-5">
+        {% if user.is_authenticated %}
+        <div class="masonry-items">
+          <img src="/images/images/new.png" alt="">
+          <a href="../create_recipe/">
+          <div class="hover-items" style="text-align: center;">
+              <h3>Post New</h3>
+              <p>Create your own recipe</p>
+          </div>
+      </div> 
+        {% for recipe in recipes %}
+        <div class="masonry-items">
+          <img src={{recipe.image.url}} alt="">
+          <a href="{%url 'recipe_detail' recipe.id%}">
+          <div class="hover-items">
+              <h3>{{recipe.name}}</h3>
+          </div>
+      </div>    {% endfor %}
+        {% else %}
         {% for recipe in recipes %}
           <div class="masonry-items">
           <img src={{recipe.image.url}} alt="">
@@ -23,6 +41,7 @@ Hello World! {{user.first_name}} {{user.last_name}}
               <h3>{{recipe.name}}</h3>
           </div>
       </div>    {% endfor %}
+        {% endif %}
     </div>
 
 {% endblock content %}

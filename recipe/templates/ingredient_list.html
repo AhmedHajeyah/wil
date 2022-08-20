@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Ingredients List {% endblock title %}
+
+{% block content %}
+
+Hello World! {{user.first_name}} {{user.last_name}}
+
+
+    <div class="container py-5">
+      <h1 class="text-center font-weight-bold">
+        view all 
+        <span class="text-success">Ingredients</span>
+      </h1> 
+      
+      <div class="masonry-container my-5">
+        {% if user.is_authenticated %}
+        <div class="masonry-items">
+          <img src="/images/images/new.png" alt="">
+          <a href="../create_ingredient/">
+          <div class="hover-items" style="text-align: center;">
+              <h3>Post New</h3>
+              <p>Create your own recipe</p>
+          </div>
+      </div> 
+        {% for ingredient in ingredients %}
+        <div class="masonry-items">
+          <img src={{ingredient.image.url}} alt="">
+          <a href="">
+          <div class="hover-items">
+              <h3>{{ingredient.name}}</h3>
+          </div>
+      </div>    {% endfor %}
+        {% else %}
+        {% for ingredient in ingredients %}
+          <div class="masonry-items">
+          <img src={{ingredient.image.url}} alt="">
+          <a href="">
+          <div class="hover-items">
+              <h3>{{ingredient.name}}</h3>
+          </div>
+      </div>    {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock content %}
+

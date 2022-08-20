@@ -31,6 +31,12 @@ urlpatterns = [
     path('recipe_list/', views.home, name='recipe_list'),
     path('create_recipe/', views.create_recipe, name='create_recipe'),
     path('recipe_detail/<int:pk>/', views.recipe_detail, name='recipe_detail'),
+    path('ingredient_list/', views.ingredient_list, name='ingredient_list'),
+    path('create_ingredient/', views.create_ingredient, name='create_ingredient'),
+    path('category_list/', views.category_list, name='category_list'),
+    path('create_category/', views.create_category, name='create_category'),
+    path('update_recipe/<int:pk>/', views.RecipeUpdateView.as_view(), name='update_recipe'),
+#    path('update_recipe/<int:pk>/', views.update_recipe, name='update_recipe'),
 ]
 
 if settings.DEBUG:

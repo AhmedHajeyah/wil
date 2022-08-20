@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import ListView
-from .forms import RegistrationForm, LoginForm, RecipeForm
-from .models import Recipe, Ingredient
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import RegistrationForm, LoginForm, RecipeForm, IngredientForm, CategoryForm
+from .models import Recipe, Ingredient, Category
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
+from .models import Recipe
+
 
 
 
@@ -84,24 +88,94 @@ def create_recipe(request):
 
 def recipe_detail(request, pk):
     recipe = Recipe.objects.get(pk=pk)
-    context = {
-        'recipe': recipe
-    }
-    return render(request, 'recipe_detail.html', context)
-
-    
-# def ingredients_list(request):
-#     ingredients = Ingredient.objects.all()
-#     context = {
-#         'ingredients': ingredients
-#     }
-#     return render(request, 'ingredients_list.html', context)
-
-"""Show Ingredients in a Recipe"""
-def ingredient_loop(request, pk):
-    recipe = Recipe.objects.get(pk=pk)
+    print(recipe.ingredients.all())
     ingredients = recipe.ingredients.all()
     context = {
-        'ingredients': ingredients
+        'recipe': recipe,
+        'ingredients': ingredients,
     }
     return render(request, 'recipe_detail.html', context)
+
+
+
+"""view all ingredients"""
+def ingredient_list(request):
+    ingredients = Ingredient.objects.all()
+    context = {
+        'ingredients': ingredients,
+    }
+    return render(request, 'ingredient_list.html', context)
+
+"""create new ingredient"""
+def create_ingredient(request):
+    form = IngredientForm()
+    if request.method == "POST":
+        form = IngredientForm(request.POST, request.FILES)
+        if form.is_valid():
+            ingredient = form.save(commit=False)
+            ingredient.save()
+            return redirect('ingredient_list')
+
+    context = {
+        "form": form,
+    }
+    return render(request, 'create_ingredient.html', context)
+
+"""view all categories"""
+def category_list(request):
+    categories = Category.objects.all()
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'category_list.html', context)
+
+"""add new category"""
+def create_category(request):
+    form = CategoryForm()
+    if request.method == "POST":
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.save()
+            return redirect('category_list')
+
+    context = {
+        "form": form,
+    }
+    return render(request, 'create_category.html', context)
+
+
+
+
+"""If you are the creator of the recipe, you can edit it"""
+class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Recipe
+    fields = "__all__"
+    template_name = 'update_recipe.html'
+    success_url = reverse_lazy('recipe_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        recipe = self.get_object()
+        if self.request.user == recipe.user:
+            return True
+        return False
+
+    def update_recipe(request, pk):
+        recipe = Recipe.objects.get(pk=pk)
+        form = RecipeForm(instance=recipe)
+        if request.method == "POST":
+            form = RecipeForm(request.POST, request.FILES, instance=recipe)
+            if form.is_valid():
+                recipe = form.save(commit=False)
+                recipe.save()
+                return redirect('recipe_list')
+
+        context = {
+            "form": form,
+            "pk": pk,
+        }
+        return render(request, 'update_recipe.html', context)
