@@ -55,9 +55,12 @@ def logout_user(request):
 
 
 def home(request):
+    return render(request, 'home.html')
+
+def recipe_list(request):
     recipes = Recipe.objects.all()
     context = {
-        'recipes': recipes
+        'recipes': recipes,
     }
     return render(request, 'recipe_list.html', context)
 

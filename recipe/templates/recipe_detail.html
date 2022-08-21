@@ -20,36 +20,39 @@
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
 
 
-<div class='recipe-card'>
-  <img src="{{ recipe.image.url }}" style="width:50%; height:50%; float:left; margin-right:10px; margin-bottom:10px; margin-top:10px; margin-left:10px; ">
-  <div class="recipe-card__body">
-    <h1>{{ recipe.name }}</h1>
-    <h5>{{ recipe.description }}</h5>
-    
 
-        <h3>Ingredients</h3>
 
-    <ul class="recipe-card__ingredients">
-      {% for ingredient in ingredients %}
-      <li>{{ingredient.name}}</li>
-    {% endfor %}
-    </ul>
-    <h3>Instructions</h3>   
-    <p>{{ recipe.instructions}}</p>
-
-        <h3>Cooking time:</h3>
-
-      <p>{{recipe.time_to_cook}}</p>
+<table width="100%" cellspacing="1" cellpadding="1" align="center"></table>
+<tbody>
+  <tr>
+    <td valign="top">  <img src="{{ recipe.image.url }}" style="width:50%; height:50%; float:left; margin-right:10px; margin-bottom:10px; margin-top:10px; margin-left:10px; ">
+      <br>
+    </td>
+    <td valign="top">  <h1>{{ recipe.name }}</h1>
+      <h5>{{ recipe.description }}</h5>
+      
   
-    
-    <h3>Calories:</h3>     
-    <p>{{ recipe.calories }}</p>
-    
-
-
-  </div>
+          <h3>Ingredients</h3>
   
-</div>
+      <ul class="recipe-card__ingredients">
+        {% for ingredient in ingredients %}
+        <li>{{ingredient.name}}</li>
+      {% endfor %}
+      </ul>
+      <h3>Instructions</h3>   
+      <p>{{ recipe.instructions}}</p>
+  
+          <h3>Cooking time:</h3>
+  
+        <p>{{recipe.time_to_cook}}</p>
+    
+      
+      <h3>Calories:</h3>     
+      <p>{{ recipe.calories }}</p><br>
+    </td>
+  </tr>
+</tbody>
+</table>
 
 
 
