@@ -1,35 +1,73 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
 
-
-{% extends 'base.html' %} {% load static %}
+{% load static %}
 {% block title %} Recipe detail {% endblock title %}
 
-{% block content %} 
-{% if recipe.user == user %}
-<div class="border-top pt-3">
-    <a href="{% url 'update_recipe' recipe.id %}">Edit</a>
-    {% else %}
-<div class="border-top pt-3">
-{% endif %}
-</div>
-    <h1>{{ recipe.name }}</h1>
-      <img src="{{ recipe.image.url }}" alt="">
-        <h3>Cooking time:</h3>  <p>{{recipe.time_to_cook}}</p>
-        <h3>Ingredients:</h3>
+{% block content %}
 
-        
-          {% for ingredient in ingredients %}
-            <li>{{ingredient.name}}</li>
-          {% endfor %}
+{% if recipe.user == user %}
+<div class="border-top">
+    <a href="{% url 'update_recipe' recipe.id %}">Edit</a>
+    <a href="{% url 'delete_recipe' recipe.id %}">Delete</a>
+
+    {% else %}
+{% endif %}
+
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+
+
+<div class='recipe-card'>
+  <img src="{{ recipe.image.url }}" style="width:50%; height:50%; float:left; margin-right:10px; margin-bottom:10px; margin-top:10px; margin-left:10px; ">
+  <div class="recipe-card__body">
+    <h1>{{ recipe.name }}</h1>
+    <h5>{{ recipe.description }}</h5>
+    
+
+        <h3>Ingredients</h3>
+
+    <ul class="recipe-card__ingredients">
+      {% for ingredient in ingredients %}
+      <li>{{ingredient.name}}</li>
+    {% endfor %}
+    </ul>
+    <h3>Instructions</h3>   
+    <p>{{ recipe.instructions}}</p>
+
+        <h3>Cooking time:</h3>
+
+      <p>{{recipe.time_to_cook}}</p>
+  
+    
+    <h3>Calories:</h3>     
+    <p>{{ recipe.calories }}</p>
+    
+
+
+  </div>
+  
+</div>
+
+
+
+
+
+
+
 
       
 
-        <h3>Instructions:</h3>  <p>{{recipe.instructions}}</p>
-        <h3>Calories:</h3>      <p>{{ recipe.calories }}</p>
-        <h3>Description</h3>    <p>{{ recipe.description }}</p>
-        <h3>Instructions</h3>   <p>{{ recipe.instructions}}</p>
 
 
-
-        </section>
         
 {% endblock content %}
+
+
+
+
+
+
+

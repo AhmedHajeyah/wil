@@ -2,25 +2,44 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_filters %}
 
-{% block title %} Register {% endblock title %}
-
 {% block content %}
+<body>
+    
+<div class="form_wrapper">
+    <div class="form_container">
+        <div class="form_container">
+          <div class="container py-5">
+            <div class="row">
+              <div class="col-md-4">
+                
+              </div>
+              <div class="col-md-4">
+                <div class="card w-100">
+                  <div class="card-header">
+                    <h3 class="mb-0">Register</h3>
+                  </div>
+                  <div class="card-body">
+                    <form method="POST" action="{% url 'register' %}">
+                      {{ form|crispy }}
+                      {% csrf_token %}
+                    <div class="d-grid gap-2"><button type="submit" class="btn btn-lg btn-block btn-primary">Register</button></div>
+                    </form>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                
+              </div>
 
-<form action="{% url 'register' %}" method="POST" />
 
-{% csrf_token %}
-{{ form|crispy }}
 
-<input type="submit" value="Register" />
-
-<div class="border-top pt-3">
-    <a href="../login">Already have ann account? Log in here</a>
+              
+              
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
-
+</body>
 {% endblock content %}
-
-
-
-
-
-

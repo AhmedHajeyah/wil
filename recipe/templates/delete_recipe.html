@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+
+{% block title %} Create Recipes {% endblock title %}
+
+{% block content %}
+
+
+<form  action="{% url 'delete_recipe' pk=recipe.id %}" method="POST" enctype="multipart/form-data" >
+      {% csrf_token %}
+<div class="form-group">
+    {{ form|crispy }}
+    <img src="{{ recipe.image.url }}" alt="">
+    <h3>Are you sure you want to delete this recipe?</h3>
+    {% csrf_token %}
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary">Delete</button>
+</div>
+</form>
+{% endblock content %}
+
+
+
+
+

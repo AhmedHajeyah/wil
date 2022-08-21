@@ -7,7 +7,6 @@
 
 <form  action="{% url 'update_recipe' pk=recipe.id %}" method="POST" enctype="multipart/form-data" >
       {% csrf_token %}
-      {% csrf_token %}
 <div class="form-group">
  {{ form|crispy }}
  <img src="{{ recipe.image.url }}" alt="">

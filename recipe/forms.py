@@ -27,7 +27,7 @@ class RecipeForm(forms.ModelForm):
         fields = ('name', 'description', 'instructions', 'servings', 'time_to_cook', 'calories', 'image', 'ingredients', 'directions')
         widgets = {
             "image": forms.FileInput(),
-            'ingredients': forms.SelectMultiple(),
+            'ingredients': forms.CheckboxSelectMultiple(),
         }
 
 """adding ingredients"""

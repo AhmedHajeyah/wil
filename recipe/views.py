@@ -77,7 +77,8 @@ def create_recipe(request):
             recipe = form.save(commit=False)
             recipe.user = request.user
             recipe.save()
-            return redirect('home')
+            form.save_m2m()
+            return redirect('home')         
 
     context = {
         "form": form,
@@ -179,3 +180,16 @@ class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             "pk": pk,
         }
         return render(request, 'update_recipe.html', context)
+
+def delete_recipe(request, pk):
+    recipe = Recipe.objects.get(pk=pk)
+    if request.method == "POST":
+        recipe.delete()
+        return redirect('recipe_list')
+
+    context = {
+        "recipe": recipe,
+        "pk": pk,
+    }
+    return render(request, 'delete_recipe.html', context)
+
